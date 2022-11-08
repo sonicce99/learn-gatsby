@@ -17,8 +17,12 @@
   },
   "dependencies": {
     "gatsby": "^4.24.7",
+    "gatsby-plugin-image": "^2.24.0",
+    "gatsby-plugin-sharp": "^4.24.0",
+    "gatsby-source-filesystem": "^4.24.0",
     "react": "^18.1.0",
-    "react-dom": "^18.1.0"
+    "react-dom": "^18.1.0",
+    "sharp": "^0.31.2"
   },
   "devDependencies": {
     "@types/node": "^17.0.45",
