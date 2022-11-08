@@ -28,6 +28,9 @@ const Layout: React.FC<Props> = ({ pageTitle, children }) => {
           <li>
             <Link to="/about">About</Link>
           </li>
+          <li>
+            <Link to="/blog">Blog</Link>
+          </li>
         </ul>
       </nav>
       <main>
