@@ -1,7 +1,7 @@
 import * as React from "react";
-import Layout from "../components/layout";
-import Seo from "../components/seo";
-import { graphql } from "gatsby";
+import Layout from "../../components/layout";
+import Seo from "../../components/seo";
+import { graphql, Link } from "gatsby";
 
 interface Props {
   data: AllMdx;
@@ -16,7 +16,6 @@ interface Nodes {
 }
 
 interface Node {
-  excerpt: string;
   frontmatter: Frontmatter;
   id: string;
 }
@@ -33,9 +32,12 @@ const BlogPage: React.FC<Props> = ({ data }) => {
       <ul>
         {data.allMdx.nodes.map((node) => (
           <article key={node.id}>
-            <h2>{node.frontmatter.title}</h2>
+            <h2>
+              <Link to={`/blog/${node.frontmatter.slug}`}>
+                {node.frontmatter.title}
+              </Link>
+            </h2>
             <p>Posted: {node.frontmatter.date}</p>
-            <p>{node.excerpt}</p>
           </article>
         ))}
       </ul>
@@ -57,7 +59,6 @@ export const query = graphql`
           title
         }
         id
-        excerpt
       }
     }
   }
