@@ -4,11 +4,11 @@ import Seo from "../components/seo";
 import { graphql } from "gatsby";
 
 interface Props {
-  data: AllFile;
+  data: AllMdx;
 }
 
-interface AllFile {
-  allFile: Nodes;
+interface AllMdx {
+  allMdx: Nodes;
 }
 
 interface Nodes {
@@ -16,15 +16,27 @@ interface Nodes {
 }
 
 interface Node {
-  name: string;
+  excerpt: string;
+  frontmatter: Frontmatter;
+  id: string;
+}
+
+interface Frontmatter {
+  date: string;
+  slug: string;
+  title: string;
 }
 
 const BlogPage: React.FC<Props> = ({ data }) => {
   return (
     <Layout pageTitle="My Blog Posts">
       <ul>
-        {data.allFile.nodes.map((node) => (
-          <li key={node.name}>{node.name}</li>
+        {data.allMdx.nodes.map((node) => (
+          <article key={node.id}>
+            <h2>{node.frontmatter.title}</h2>
+            <p>Posted: {node.frontmatter.date}</p>
+            <p>{node.excerpt}</p>
+          </article>
         ))}
       </ul>
     </Layout>
@@ -37,9 +49,15 @@ export default BlogPage;
 
 export const query = graphql`
   query {
-    allFile {
+    allMdx {
       nodes {
-        name
+        frontmatter {
+          date(formatString: "MMMM D, YYYY")
+          slug
+          title
+        }
+        id
+        excerpt
       }
     }
   }
